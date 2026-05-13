@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/AimsProject">
+      <sourceFolder url="file://$MODULE_DIR$/AimsProject/src" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/OtherProjects">
+      <sourceFolder url="file://$MODULE_DIR$/OtherProjects/src" isTestSource="false" />
+    </content>
+    <orderEntry type="jdk" jdkName="21" jdkType="JavaSDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
