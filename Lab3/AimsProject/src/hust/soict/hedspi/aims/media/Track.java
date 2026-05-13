@@ -28,4 +28,16 @@ public class Track implements Playable{
     public int getLength() {
         return length;
     }
+<<<<<<< HEAD
+=======
+
+    // So sánh để chống trùng bài
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof Track)) return false;
+        Track tmp = (Track)obj;
+        boolean titleMatch = (this.title != null) ? this.title.equals(tmp.title) : (tmp.title == null);
+        return titleMatch && this.length == tmp.length;
+    }
+>>>>>>> cb07005 (update lab)
 }

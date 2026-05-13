@@ -6,6 +6,26 @@ import java.util.ArrayList;
 public class Store {
     private ArrayList<Media> itemsInStore = new ArrayList<Media>();
 
+<<<<<<< HEAD
+=======
+    public void print() {
+        System.out.println("\n********************STORE********************");
+        for (int i = 0; i < itemsInStore.size(); i++) {
+            System.out.println((i+1) + ". " + itemsInStore.get(i).toString());
+        }
+        System.out.println("*********************************************");
+    }
+
+    public Media search(String title) {
+        for (Media media : itemsInStore) {
+            if (media.getTitle().equalsIgnoreCase(title)) {
+                return media; // Trả về đối tượng nếu tìm thấy
+            }
+        }
+        return null; // Trả về null nếu không tìm thấy
+    }
+
+>>>>>>> cb07005 (update lab)
     // Thêm mặt hàng vào cửa hàng
     public void addMedia(Media media) {
         if (!itemsInStore.contains(media)) {

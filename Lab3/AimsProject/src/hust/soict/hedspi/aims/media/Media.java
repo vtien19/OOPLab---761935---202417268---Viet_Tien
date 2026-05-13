@@ -1,6 +1,12 @@
 package hust.soict.hedspi.aims.media;
 
+<<<<<<< HEAD
 public class Media {
+=======
+import java.util.Comparator;
+
+public abstract class Media {
+>>>>>>> cb07005 (update lab)
     private int id;
     private String title;
     private String category;
@@ -13,6 +19,12 @@ public class Media {
         this.cost = cost;
     }
 
+<<<<<<< HEAD
+=======
+    public static final Comparator<Media> COMPARE_BY_TITLE_COST = new MediaComparatorByTitleCost();
+    public static final Comparator<Media> COMPARE_BY_COST_TITLE = new MediaComparatorByCostTitle();
+
+>>>>>>> cb07005 (update lab)
     // Getter và Setter
     public int getId() {
         return id;

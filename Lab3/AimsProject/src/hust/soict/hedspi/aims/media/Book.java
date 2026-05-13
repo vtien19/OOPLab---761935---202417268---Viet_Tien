@@ -3,6 +3,10 @@ package hust.soict.hedspi.aims.media;
 import java.util.ArrayList;
 import java.util.List;
 
+<<<<<<< HEAD
+=======
+// Kế thừa Media để tái sử dụng id, title, category , cost
+>>>>>>> cb07005 (update lab)
 public class Book extends Media {
     private List<String> authors = new ArrayList<String>();
 
@@ -10,6 +14,7 @@ public class Book extends Media {
         super(id,title,category,cost);
     }
 
+<<<<<<< HEAD
     public void addAuthor(String authorName) {
         if(!authors.contains(authorName)) {
             authors.add(authorName);
@@ -18,6 +23,28 @@ public class Book extends Media {
 
     public void removeAuthor(String authorName){
         authors.remove(authorName);
+=======
+    // Thực hiện yêu cầu hàm addAuthor
+    public void addAuthor(String authorName) {
+        // Kiểm tra xem tác giả đã có trong danh sách chưa
+        if(!authors.contains(authorName)) {
+            authors.add(authorName);
+            System.out.println("Đã thêm tác giả: " + authorName);
+        } else {
+            System.out.println("Tác giả '" + authorName + "' đã tồn tại!");
+        }
+    }
+
+    // Thực hiện yêu cầu hàm removeAuthor
+    public void removeAuthor(String authorName){
+        // Kiểm tra xem tác giả có trong danh sách không rồi mới xoá
+        if (authors.contains(authorName)) {
+            authors.remove(authorName);
+            System.out.println("Đã xoá tác giả: " + authorName);
+        } else {
+            System.out.println("Không tìm thấy tác giả '" + authorName + "' để xoá!");
+        }
+>>>>>>> cb07005 (update lab)
     }
 
     @Override
