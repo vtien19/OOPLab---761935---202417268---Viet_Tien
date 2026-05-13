@@ -1,7 +1,11 @@
 .DS_Store
 .idea/
 *.iml
-.DS_Store
 out/
 *.class
 
+=======
+.DS_Store
+*.iml
+idea/
+>>>>>>> ee66d34 (resolve merge conflicts)
