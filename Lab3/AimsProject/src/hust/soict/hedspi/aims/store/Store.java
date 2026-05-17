@@ -6,8 +6,6 @@ import java.util.ArrayList;
 public class Store {
     private ArrayList<Media> itemsInStore = new ArrayList<Media>();
 
-<<<<<<< HEAD
-=======
     public void print() {
         System.out.println("\n********************STORE********************");
         for (int i = 0; i < itemsInStore.size(); i++) {
@@ -25,7 +23,6 @@ public class Store {
         return null; // Trả về null nếu không tìm thấy
     }
 
->>>>>>> cb07005 (update lab)
     // Thêm mặt hàng vào cửa hàng
     public void addMedia(Media media) {
         if (!itemsInStore.contains(media)) {

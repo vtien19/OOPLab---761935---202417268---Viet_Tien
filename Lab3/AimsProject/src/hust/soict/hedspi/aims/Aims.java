@@ -1,48 +1,8 @@
 package hust.soict.hedspi.aims;
 
-import hust.soict.hedspi.aims.cart.Cart;
-<<<<<<< HEAD
-import hust.soict.hedspi.aims.media.Book;
-import hust.soict.hedspi.aims.media.CompacDisc;
-import hust.soict.hedspi.aims.media.DigitalVideoDisc;
-import hust.soict.hedspi.aims.media.Track;
-
-public class Aims {
-    public static void main(String[] args) {
-        // 1. Tạo giỏ hàng mới
-        Cart anOrder = new Cart();
-
-        // 2. Tạo DVD và thêm vào giỏ
-        DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King",
-                "Animation", "Roger Allers", 87, 19.95f);
-        anOrder.addMedia(dvd1); // Sử dụng addMedia thay vì addDigitalVideoDisc
-
-        // 3. Tạo Sách và thêm vào giỏ
-        Book book1 = new Book(1, "Java Programming", "Education", 25.0f);
-        book1.addAuthor("James Gosling");
-        anOrder.addMedia(book1);
-
-        // 4. Tạo CD và thêm vào giỏ
-        CompacDisc cd1 = new CompacDisc(2, "Greatest Hits", "Music", 15.0f, 0, "Various Artists", "Queen");
-        cd1.addTrack(new Track("Bohemian Rhapsody", 6));
-        cd1.addTrack(new Track("We Will Rock You", 3));
-        anOrder.addMedia(cd1);
-
-        // 5. In thông tin giỏ hàng và tổng tiền
-        System.out.println("Total Cost is: " + anOrder.totalCost());
-        anOrder.print();
-
-        // 6. Chạy thử (Play) các phương tiện hỗ trợ Playable
-        System.out.println("\n--- Testing Playback ---");
-        dvd1.play();
-        cd1.play();
-
-        // Lưu ý: book1.play() sẽ báo lỗi vì Book không triển khai Playable
-    }
-}
-=======
 import hust.soict.hedspi.aims.media.*;
 import hust.soict.hedspi.aims.store.Store;
+import hust.soict.hedspi.aims.cart.Cart;
 import java.util.Scanner;
 
 public class Aims {
@@ -101,7 +61,6 @@ public class Aims {
     }
 
     public static void main(String[] args) {
-        // Khởi tạo dữ liệu mẫu cho Store tại đây (DVD, CD, Book)
         int choice;
         while (true) {
             showMenu();
@@ -117,42 +76,47 @@ public class Aims {
 
     // Xử lý View Store
     public static void viewStore() {
-        store.print(); // Hiển thị danh sách item trong cửa hàng
+        store.print();
         int choice;
         while (true) {
             storeMenu();
             choice = scanner.nextInt();
-            scanner.nextLine();
-            if (choice == 0) break; // Quay lại menu chính
+            scanner.nextLine(); // Chống trôi lệnh
+            if (choice == 0) break;
 
             switch (choice) {
-                case 1: // See details
+                case 1:
                     System.out.print("Enter title: ");
                     String title = scanner.nextLine();
-                    Media m = store.search(title); // Giả định store có hàm search
+                    Media m = store.search(title);
                     if (m != null) {
                         System.out.println(m.toString());
                         handleMediaDetails(m);
                     } else System.out.println("Not found.");
                     break;
-                case 2: // Add to cart
+                case 2:
                     System.out.print("Enter title to add: ");
                     String tAdd = scanner.nextLine();
                     Media mAdd = store.search(tAdd);
                     if (mAdd != null) {
                         cart.addMedia(mAdd);
-                        // Yêu cầu Bài 18: Hiển thị số lượng DVD trong giỏ
                         System.out.println("DVDs in cart: " + cart.getQtyOfDVDs());
+                    } else {
+                        System.out.println("Media not found in store.");
                     }
                     break;
-                case 3: // Play media
+                case 3:
                     System.out.print("Enter title to play: ");
                     String tPlay = scanner.nextLine();
                     Media mPlay = store.search(tPlay);
                     if (mPlay instanceof Playable) ((Playable) mPlay).play();
                     else System.out.println("Cannot play this type.");
                     break;
-                case 4: viewCart(); break;
+                case 4:
+                    viewCart();
+                    break;
+                default:
+                    System.out.println("Invalid option.");
             }
         }
     }
@@ -161,8 +125,14 @@ public class Aims {
     private static void handleMediaDetails(Media m) {
         mediaDetailsMenu();
         int choice = scanner.nextInt();
-        if (choice == 1) cart.addMedia(m);
-        else if (choice == 2 && m instanceof Playable) ((Playable) m).play();
+        scanner.nextLine(); // Chống trôi lệnh
+
+        if (choice == 1) {
+            cart.addMedia(m);
+            System.out.println("DVDs in cart: " + cart.getQtyOfDVDs());
+        } else if (choice == 2 && m instanceof Playable) {
+            ((Playable) m).play();
+        }
     }
 
     // Xử lý Giỏ hàng (Cart)
@@ -176,9 +146,25 @@ public class Aims {
             if (choice == 0) break;
 
             switch (choice) {
+                case 1: // Filter
+                    System.out.print("Filter by: 1. ID | 2. Title: ");
+                    int filterChoice = scanner.nextInt();
+                    scanner.nextLine();
+                    if (filterChoice == 1) {
+                        System.out.print("Enter ID: ");
+                        int id = scanner.nextInt();
+                        scanner.nextLine();
+                        cart.search(id);
+                    } else {
+                        System.out.print("Enter Title: ");
+                        String title = scanner.nextLine();
+                        cart.search(title);
+                    }
+                    break;
                 case 2: // Sort
                     System.out.print("1. By Title | 2. By Cost: ");
                     int s = scanner.nextInt();
+                    scanner.nextLine();
                     if (s == 1) cart.sortByTitle(); else cart.sortByCost();
                     cart.print();
                     break;
@@ -188,10 +174,19 @@ public class Aims {
                     Media mRem = cart.search(tRem);
                     if (mRem != null) cart.removeMedia(mRem);
                     break;
+                case 4: // Play
+                    System.out.print("Enter title to play: ");
+                    String tCartPlay = scanner.nextLine();
+                    Media mCartPlay = cart.search(tCartPlay);
+                    if (mCartPlay instanceof Playable) ((Playable) mCartPlay).play();
+                    else System.out.println("Cannot play this type.");
+                    break;
                 case 5: // Place order
                     System.out.println("Order created! Emptying cart...");
-                    cart = new Cart(); // Tạo giỏ mới (làm trống)
+                    cart = new Cart();
                     return;
+                default:
+                    System.out.println("Invalid option.");
             }
         }
     }
@@ -206,14 +201,13 @@ public class Aims {
             System.out.print("Please choose: ");
 
             choice = scanner.nextInt();
-            scanner.nextLine(); // Chống trôi lệnh
+            scanner.nextLine();
 
             if (choice == 1) {
                 System.out.println("Choose media type: 1. Book | 2. CD | 3. DVD");
                 int type = scanner.nextInt();
                 scanner.nextLine();
 
-                // Nhập các thông tin cơ bản
                 System.out.print("Enter Title: ");
                 String title = scanner.nextLine();
                 System.out.print("Enter Category: ");
@@ -223,15 +217,14 @@ public class Aims {
                 scanner.nextLine();
 
                 switch (type) {
-                    case 1: // Thêm Book
-                        // Giả sử Book của bạn dùng Constructor: (id, title, category, cost)
+                    case 1:
                         System.out.print("Enter ID: ");
                         int idBook = scanner.nextInt();
                         scanner.nextLine();
                         store.addMedia(new Book(idBook, title, category, cost));
                         break;
 
-                    case 2: // Thêm CD
+                    case 2:
                         System.out.print("Enter ID: ");
                         int idCD = scanner.nextInt();
                         scanner.nextLine();
@@ -243,19 +236,16 @@ public class Aims {
                         int lengthCD = scanner.nextInt();
                         scanner.nextLine();
 
-                        // Gọi CompactDisc (id, title, category, cost, length, director, artist)
                         store.addMedia(new CompacDisc(idCD, title, category, cost, lengthCD, directorCD, artist));
                         break;
 
-                    case 3: // Thêm DVD
+                    case 3:
                         System.out.print("Enter Director: ");
                         String directorDVD = scanner.nextLine();
                         System.out.print("Enter Length: ");
                         int lengthDVD = scanner.nextInt();
                         scanner.nextLine();
 
-                        // SỬA TẠI ĐÂY: Gọi theo đúng Constructor phổ biến của DVD (Title, Category, Director, Length, Cost)
-                        // Không truyền ID vào để tránh lỗi "Cannot resolve constructor"
                         store.addMedia(new DigitalVideoDisc(title, category, directorDVD, lengthDVD, cost));
                         break;
 
@@ -277,4 +267,3 @@ public class Aims {
         } while (choice != 0);
     }
 }
->>>>>>> cb07005 (update lab)
