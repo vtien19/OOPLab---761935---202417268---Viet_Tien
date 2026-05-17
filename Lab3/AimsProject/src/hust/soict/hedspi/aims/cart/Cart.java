@@ -1,20 +1,14 @@
 package hust.soict.hedspi.aims.cart;
 
 import hust.soict.hedspi.aims.media.Media;
-<<<<<<< HEAD
-import java.util.ArrayList;
-=======
 import hust.soict.hedspi.aims.media.DigitalVideoDisc;
 import java.util.ArrayList;
 import java.util.Collections;
->>>>>>> cb07005 (update lab)
 
 public class Cart {
     // Dùng ArrayList để không lo bị đầy bộ nhớ (Vượt quá 20 đĩa)
     private ArrayList<Media> itemsOrdered = new ArrayList<>();
 
-<<<<<<< HEAD
-=======
     public int getQtyOfDVDs() {
         int count = 0;
         for (Media m : itemsOrdered) {
@@ -34,8 +28,15 @@ public class Cart {
         }
         return null; // Trả về null nếu không tìm thấy trong giỏ hàng
     }
+    public Media search(int id) {
+        for (Media m : itemsOrdered) {
+            if (m.getId() == id) {
+                return m;
+            }
+        }
+        return null;
+    }
 
->>>>>>> cb07005 (update lab)
     public void addMedia(Media media) {
         itemsOrdered.add(media);
         System.out.println("The media has been added.");
@@ -69,8 +70,6 @@ public class Cart {
         System.out.println("Total cost: " + totalCost() + " $");
         System.out.println("*******************************************");
     }
-<<<<<<< HEAD
-=======
 
     public void sortByTitle() {
         Collections.sort(itemsOrdered, Media.COMPARE_BY_TITLE_COST);
@@ -81,5 +80,4 @@ public class Cart {
         Collections.sort(itemsOrdered, Media.COMPARE_BY_COST_TITLE);System.out.println("Giỏ hàng đã được sắp xếp theo giá.");
         System.out.println("Giỏ hàng đã được sắp xếp theo giá.");
     }
->>>>>>> cb07005 (update lab)
 }

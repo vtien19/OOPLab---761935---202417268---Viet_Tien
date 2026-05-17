@@ -3,31 +3,18 @@ package hust.soict.hedspi.aims.media;
 import java.util.ArrayList;
 import java.util.List;
 
-<<<<<<< HEAD
-=======
-// Kế thừa Media để tái sử dụng id, title, category , cost
->>>>>>> cb07005 (update lab)
+// Kế thừa Media để tái sử dụng id, title, category, cost
 public class Book extends Media {
     private List<String> authors = new ArrayList<String>();
 
+    // Constructor
     public Book(int id, String title, String category, float cost){
-        super(id,title,category,cost);
+        super(id, title, category, cost);
     }
 
-<<<<<<< HEAD
+    // Hàm thêm tác giả (Đã giữ lại bản đầy đủ thông báo)
     public void addAuthor(String authorName) {
-        if(!authors.contains(authorName)) {
-            authors.add(authorName);
-        }
-    }
-
-    public void removeAuthor(String authorName){
-        authors.remove(authorName);
-=======
-    // Thực hiện yêu cầu hàm addAuthor
-    public void addAuthor(String authorName) {
-        // Kiểm tra xem tác giả đã có trong danh sách chưa
-        if(!authors.contains(authorName)) {
+        if (!authors.contains(authorName)) {
             authors.add(authorName);
             System.out.println("Đã thêm tác giả: " + authorName);
         } else {
@@ -35,16 +22,19 @@ public class Book extends Media {
         }
     }
 
-    // Thực hiện yêu cầu hàm removeAuthor
+    // Hàm xóa tác giả (Đã giữ lại bản đầy đủ thông báo)
     public void removeAuthor(String authorName){
-        // Kiểm tra xem tác giả có trong danh sách không rồi mới xoá
         if (authors.contains(authorName)) {
             authors.remove(authorName);
             System.out.println("Đã xoá tác giả: " + authorName);
         } else {
             System.out.println("Không tìm thấy tác giả '" + authorName + "' để xoá!");
         }
->>>>>>> cb07005 (update lab)
+    }
+
+    // Hàm lấy danh sách tác giả (nếu cần dùng ở chỗ khác)
+    public List<String> getAuthors() {
+        return authors;
     }
 
     @Override

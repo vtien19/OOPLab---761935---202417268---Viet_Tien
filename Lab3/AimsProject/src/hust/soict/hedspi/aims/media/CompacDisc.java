@@ -15,20 +15,14 @@ public class CompacDisc extends Disc implements Playable {
             System.out.println("Track is already in the list.");
         } else {
             tracks.add(track);
-<<<<<<< HEAD
-=======
             System.out.println("Track '" + track.getTitle() + "' added.");
->>>>>>> cb07005 (update lab)
         }
     }
 
     public void removeTrack(Track track) {
         if (tracks.contains(track)) {
             tracks.remove(track);
-<<<<<<< HEAD
-=======
             System.out.println("Track '" + track.getTitle() + "' removed.");
->>>>>>> cb07005 (update lab)
         } else {
             System.out.println("Track does not exist in the list.");
         }
